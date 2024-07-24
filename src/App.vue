@@ -1,26 +1,66 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="app-container">
+    <ShirtSelector @update-shirt="updateShirt" />
+    <ColorSelector @update-color="updateColor" />
+    <PrintSelector @update-print="updatePrint" />
+    <Preview :shirt="selectedShirt" :color="selectedColor" :print="selectedPrint" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ShirtSelector from './components/ShirtSelector.vue';
+import ColorSelector from './components/ColorSelector.vue';
+import PrintSelector from './components/PrintSelector.vue';
+import Preview from './components/PreviewShirt.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    ShirtSelector,
+    ColorSelector,
+    PrintSelector,
+    Preview
+  },
+  data() {
+    return {
+      selectedShirt: null,
+      selectedColor: null,
+      selectedPrint: null
+    };
+  },
+  methods: {
+    updateShirt(shirt) {
+      this.selectedShirt = shirt;
+    },
+    updateColor(color) {
+      this.selectedColor = color;
+    },
+    updatePrint(print) {
+      this.selectedPrint = print;
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 </style>
